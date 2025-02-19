@@ -1284,12 +1284,31 @@
         new Date().getFullYear();
     </script>
     <script>
+      let frases = [
+        "👀 Espiando a la competencia, ¿eh?",
+        "😢 ¿Nos estás dejando por otro?",
+        "❤️ La competencia no te quiere como nosotros",
+        "😏 Sabemos que volverás...",
+      ];
+      let originalTitle = document.title;
+      let scrollInterval;
+      let speed = 10; // Ajusta la velocidad aquí (100 = rápido, 50 = súper rápido)
+
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
-          document.title = "Counecta | 👀 Espiando a la competencia, ¿eh?";
+          let frase = frases[Math.floor(Math.random() * frases.length)];
+          let scrollText = " " + frase + " ";
+          let index = 0;
+
+          clearInterval(scrollInterval);
+          scrollInterval = setInterval(() => {
+            document.title =
+              scrollText.substring(index) + scrollText.substring(0, index);
+            index = (index + 1) % scrollText.length;
+          }, speed); // Cambia este valor para ajustar la velocidad
         } else {
-          document.title =
-            "Counecta | Soluciones tecnológicas para empresas y personas con ideas brillantes";
+          clearInterval(scrollInterval);
+          document.title = originalTitle;
         }
       });
     </script>
